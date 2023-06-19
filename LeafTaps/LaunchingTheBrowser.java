@@ -1,7 +1,9 @@
 package leaftaps;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -27,6 +29,12 @@ public class LaunchingTheBrowser {
 		driver.findElement(By.id("createLeadForm_companyName")).sendKeys("TEst");
 		driver.findElement(By.id("createLeadForm_firstName")).sendKeys("Manoj");
 		driver.findElement(By.id("createLeadForm_lastName")).sendKeys("Subramaniyam");
+		//DropDown
+		WebElement getdropdown=driver.findElement(By.id("createLeadForm_dataSourceId"));
+		Select dd1 = new Select(getdropdown);
+		dd1.selectByVisibleText("Employee");
+		//dd1.selectBYValue("LEAD_EMPLOYEE");
+		//dd1.selectByIndex(3);
 		driver.findElement(By.name("submitButton")).click();
 		
 		//get title
