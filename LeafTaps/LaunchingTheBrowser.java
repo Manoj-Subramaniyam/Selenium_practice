@@ -23,6 +23,20 @@ public class LaunchingTheBrowser {
 		String s= driver.findElement(By.tagName("h2")).getText();
 		System.out.println(s);
 		driver.findElement(By.linkText("CRM/SFA")).click();
+		driver.findElement(By.linkText("Create Lead")).click();
+		driver.findElement(By.id("createLeadForm_companyName")).sendKeys("TEst");
+		driver.findElement(By.id("createLeadForm_firstName")).sendKeys("Manoj");
+		driver.findElement(By.id("createLeadForm_lastName")).sendKeys("Subramaniyam");
+		driver.findElement(By.name("submitButton")).click();
+		
+		//get title
+		String storeTitle=driver.getTitle();
+		System.out.println(storeTitle);
+		//get number on the company name
+		
+		String storeText=driver.findElement(By.id("viewLead_companyName_sp")).getText();
+		String getNumbers=storeText.replaceAll("\\D", "");
+		System.out.println(getNumbers);
 		driver.quit();
 	}
 
