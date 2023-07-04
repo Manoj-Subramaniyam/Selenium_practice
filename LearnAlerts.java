@@ -30,7 +30,28 @@ public class LearnAlerts {
 		alert.accept();
 		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Simple Dialog)']/following-sibling::span")).getText());
 		
+		//Alert accept and cancel
+		driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::button")).click();
+		alert.accept();
+		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::span")).getText());
 		
+		driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::button")).click();
+		alert.dismiss();
+		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::span")).getText());
+		
+		//Alert  input text
+		
+		driver.findElement(By.xpath("//h5[text()=' Alert (Prompt Dialog)']/following-sibling::button")).click();
+		alert.sendKeys("Test");
+		alert.accept();
+		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Prompt Dialog)']/following-sibling::span")).getText());
+		
+		driver.findElement(By.xpath("//h5[text()=' Alert (Prompt Dialog)']/following-sibling::button")).click();
+		alert.dismiss();
+		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Prompt Dialog)']/following-sibling::span")).getText());
+		
+		
+		driver.quit();
 		
 		
 		
