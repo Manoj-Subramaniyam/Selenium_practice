@@ -36,6 +36,7 @@ public class LearnAlerts {
 		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::span")).getText());
 		
 		driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::button")).click();
+		System.out.println(alert.getText());
 		alert.dismiss();
 		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Confirm Dialog)']/following-sibling::span")).getText());
 		
@@ -50,7 +51,7 @@ public class LearnAlerts {
 		alert.dismiss();
 		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Prompt Dialog)']/following-sibling::span")).getText());
 		
-		
+	
 		driver.quit();
 		
 		
