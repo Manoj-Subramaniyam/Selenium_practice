@@ -51,7 +51,27 @@ public class LearnAlerts {
 		alert.dismiss();
 		System.out.println(driver.findElement(By.xpath("//h5[text()=' Alert (Prompt Dialog)']/following-sibling::span")).getText());
 		
-	
+	//Sweet alert simple
+		driver.findElement(By.xpath("//h5[text()='Sweet Alert (Simple Dialog)']/following::button[1]")).click();
+		
+		driver.findElement(By.xpath("//span[text()='Dismiss']")).click();
+		
+		driver.findElement(By.xpath("//h5[text()='Sweet Alert (Simple Dialog)']/following::button[1]")).click();
+		
+		driver.findElement(By.xpath("//span[text()='Dialog']/following::a[1]")).click();
+		
+	//sweet alert confirmation
+		
+		driver.findElement(By.xpath("//h5[text()='Sweet Alert (Confirmation)']/following::button[1]")).click();
+		
+		driver.findElement(By.xpath("//span[text()='Yes']")).click();
+		driver.findElement(By.xpath("//h5[text()='Sweet Alert (Confirmation)']/following::button[1]")).click();
+		
+		driver.findElement(By.xpath("//span[text()='No']")).click();
+		driver.findElement(By.xpath("//h5[text()='Sweet Alert (Confirmation)']/following::button[1]")).click();
+		driver.findElement(By.xpath("//span[text()='Confirmation']/following::span[1]")).click();
+		
+		
 		driver.quit();
 		
 		
