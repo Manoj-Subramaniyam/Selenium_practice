@@ -27,11 +27,26 @@ public class LearnWindowHandle {
 		driver.findElement(By.xpath("//h5[text()='Click and Confirm new Window Opens']/following-sibling::button")).click();
 		Set<String> numOfWindows= driver.getWindowHandles();
 		List<String>numOfWindowsList= new ArrayList<String>(numOfWindows);
-		System.out.println(numOfWindowsList.get(1));
+		//System.out.println(numOfWindowsList.get(1));
 		driver.switchTo().window(numOfWindowsList.get(1));
-		driver.close();
+		
 		driver.switchTo().window(currentWindow);
 		driver.findElement(By.xpath("//h5[text()='Close all windows except Primary']/following-sibling::button")).click();
+		numOfWindows= driver.getWindowHandles();
+		numOfWindowsList= new ArrayList<String>(numOfWindows);
+		for(String window:numOfWindowsList)
+		{
+			if(!window.equals(currentWindow))
+			{
+				driver.switchTo().window(window);
+				if(!driver.getTitle().equals("Dashboard")) {
+					
+					driver.close();
+					}
+			}
+		}
+		driver.switchTo().window(currentWindow);
+		driver.findElement(By.xpath("//h5[text()='Find the number of opened tabs']/following-sibling::button")).click();
 		numOfWindows= driver.getWindowHandles();
 		numOfWindowsList= new ArrayList<String>(numOfWindows);
 		for(String window:numOfWindowsList)
@@ -43,9 +58,19 @@ public class LearnWindowHandle {
 				driver.close();
 			}
 		}
-		driver.switchTo().window(currentWindow);
 		Thread.sleep(5000);
-		
+		driver.findElement(By.xpath("//h5[text()='Wait for 2 new tabs to open']/following-sibling::button")).click();
+		numOfWindows= driver.getWindowHandles();
+		numOfWindowsList= new ArrayList<String>(numOfWindows);
+		for(String window:numOfWindowsList)
+		{
+			if(!window.equals(currentWindow))
+			{
+				driver.switchTo().window(window);
+				System.out.println(driver.getTitle());
+				driver.close();
+			}
+		}
 		
 		
 		driver.quit();
