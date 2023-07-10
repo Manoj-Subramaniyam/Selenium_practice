@@ -38,10 +38,38 @@ public class LearnDragAndDrop {
 		System.out.println(driver.findElement(By.xpath("//p[@class='ui-widget-header']")).getText());
 		
 		WebElement drop=driver.findElement(By.xpath("//div[@id='form:drag_content']"));
-		builder = new Actions(driver);
+		
 		WebElement target= driver.findElement(By.xpath("//div[@id='form:drop']"));
 		builder.dragAndDrop(drop, target).perform();
 		System.out.println(driver.findElement(By.xpath("//p[@class='ui-widget-header']")).getText());
+	
+		//drag and drop the column
+		WebElement source = driver.findElement(By.xpath("//tr[@role='row']//th[3]/span[text()='Quantity']"));
+		target=driver.findElement(By.xpath("//tr[@role='row']//th[2]/span[text()='Category']"));
+		
+		builder.clickAndHold(source).clickAndHold(target).release().perform();
+		System.out.println(driver.findElement(By.xpath("//tr[@role='row']//th[2]/span")).getText());
+		
+		source = driver.findElement(By.xpath("//tr[@role='row']//th[3]/span[text()='Category']"));
+		target=driver.findElement(By.xpath("//tr[@role='row']/th/span[text()='Name']"));
+		
+		builder.clickAndHold(source).clickAndHold(target).release().perform();
+		System.out.println(driver.findElement(By.xpath("//tr[@role='row']//th/span")).getText());
+		
+		//drag and drop rows
+	
+		
+		source = driver.findElement(By.xpath("(//tbody[contains(@id,'form:j_id')])[2]/tr[2]"));
+		target=driver.findElement(By.xpath("(//tbody[contains(@id,'form:j_id')])[2]/tr"));
+		
+		builder.clickAndHold(source).clickAndHold(target).release().perform();
+		//System.out.println(driver.findElement(By.xpath("//tbody[contains(@id,'form:j_id')])[2]/tr/td[1]")).getText());
+		
+		source = driver.findElement(By.xpath("(//tbody[contains(@id,'form:j_id')])[2]/tr[4]"));
+		target=driver.findElement(By.xpath("(//tbody[contains(@id,'form:j_id')])[2]/tr[8]"));
+		
+		builder.clickAndHold(source).clickAndHold(target).release().perform();
+		//System.out.println(driver.findElement(By.xpath("(//tbody[contains(@id,'form:j_id')])[2]/tr[8]/td[8]")).getText());
 		
 		
 		driver.close();
