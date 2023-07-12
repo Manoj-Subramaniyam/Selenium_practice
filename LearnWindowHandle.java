@@ -9,6 +9,9 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
@@ -58,20 +61,21 @@ public class LearnWindowHandle {
 				driver.close();
 			}
 		}
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//h5[text()='Wait for 2 new tabs to open']/following-sibling::button")).click();
-		numOfWindows= driver.getWindowHandles();
-		numOfWindowsList= new ArrayList<String>(numOfWindows);
+		
+		driver.switchTo().window(currentWindow);
+		driver.findElement(By.xpath("//*[text()='Open with delay']")).click();
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.numberOfWindowsToBe(3));
+		numOfWindows=driver.getWindowHandles();
+		numOfWindowsList = new ArrayList<String>(numOfWindows);
 		for(String window:numOfWindowsList)
 		{
-			if(!window.equals(currentWindow))
-			{
-				driver.switchTo().window(window);
-				System.out.println(driver.getTitle());
-				driver.close();
-			}
+			if(!currentWindow.equals(window))
+			driver.switchTo().window(window);
+			
 		}
-		
+		System.out.println(driver.findElement(By.xpath("//td/span[@class='ui-column-title' and text()='Name']")).getText());
+		driver.close();
 		
 		driver.quit();
 		
