@@ -23,13 +23,21 @@ public class LearnWaits {
 	driver.get("https://www.leafground.com/");
 	driver.findElement(By.xpath("//span[text()='Element']/ancestor::a")).click();
 	driver.findElement(By.xpath("//span[text()='Waits']")).click();
+	//Visibility of element
 	driver.findElement(By.xpath("//h5[contains(text(),'Wait for Visibility')]/following::button[1]")).click();
 	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	WebElement ele=driver.findElement(By.xpath("//*[contains(text(),'I am here')]"));
 	wait.until(ExpectedConditions.visibilityOf(ele));
 	
 	if(ele.isDisplayed()) System.out.println("element is Visible");
-		
+	
+	//invisbility of element
+	driver.findElement(By.xpath("//h5[contains(text(),'Wait for Invisibility')]/following::button[1]")).click();
+	ele=driver.findElement(By.xpath("//span[text()='I am about to hide']"));
+	boolean bool=wait.until(ExpectedConditions.invisibilityOf(ele));
+	
+	if(bool)  System.out.println("element is Invisible");
+		driver.close();
 		
 }
 }
