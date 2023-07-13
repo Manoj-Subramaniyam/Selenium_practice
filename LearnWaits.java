@@ -37,7 +37,25 @@ public class LearnWaits {
 	boolean bool=wait.until(ExpectedConditions.invisibilityOf(ele));
 	
 	if(bool)  System.out.println("element is Invisible");
-		driver.close();
+	
+	
+	//Wait for Clickability
+	driver.findElement(By.xpath("//h5[contains(text(),'Wait for Clickability')]/following::button[1]")).click();
+	
+	ele=driver.findElement(By.xpath("//span[text()='Message 1']"));
+	
+	wait.until(ExpectedConditions.invisibilityOf(ele));
+	driver.findElement(By.xpath("//span[text()='Click Second']")).click();
+	
+	System.out.println("element clicked");
+	
+	//wait for text change
+	driver.findElement(By.xpath("//h5[contains(text(),'Wait for Text')]/following::button[1]")).click();
+	//ele=driver.findElement(By.xpath("//span[contains(text(),'Did you notice?')]"));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Did you notice?')]")));
+	driver.findElement(By.xpath("//span[contains(text(),'Did you notice?')]")).click();
+	System.out.println("Element displayed");
+	driver.close();
 		
 }
 }
