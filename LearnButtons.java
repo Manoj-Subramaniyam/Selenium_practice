@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,7 +18,7 @@ import org.openqa.selenium.WebElement;
 public class LearnButtons {
 
 	@Test
-	public void buttons() 
+	public void buttons() throws InterruptedException 
 	{
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
@@ -42,8 +43,11 @@ public class LearnButtons {
 		System.out.println(driver.findElement(By.xpath("//h5[contains(text(),'Find the height')]/following-sibling::button")).getSize());
 		Actions builder = new Actions(driver);
 		builder.moveToElement(driver.findElement(By.xpath("//h5[contains(text(),'Mouse')]/following-sibling::button"))).perform();
-		
 		System.out.println(driver.findElement(By.xpath("//h5[contains(text(),'Mouse')]/following-sibling::button/span")).getCssValue("background-color"));
+		driver.findElement(By.xpath("//h5[contains(text(),'Click Image Button')]/following::button")).click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();",driver.findElement(By.xpath("//span[contains(text(),'Primary')]")));
+		
 		driver.close();
 	}
 }
