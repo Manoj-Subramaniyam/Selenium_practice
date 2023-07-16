@@ -4,18 +4,20 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 public class LearnButtons {
 
-	
-	public void buttons()
+	@Test
+	public void buttons() 
 	{
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
@@ -27,11 +29,21 @@ public class LearnButtons {
 		driver.findElement(By.xpath("//span[text()='Element']/ancestor::a")).click();
 		driver.findElement(By.xpath("//span[text()='Button']")).click();
 		driver.findElement(By.xpath("//h5[contains(text(),'Click and')]/following-sibling::button")).click();
-		if(driver.findElement(By.xpath("//title")).getText().equals("Dashboard"))
+		
+		if(driver.getTitle().equals("Dashboard"))
 				System.out.println("In Dashboard");
 		driver.findElement(By.xpath("//span[text()='Element']/ancestor::a")).click();
 		driver.findElement(By.xpath("//span[text()='Button']")).click();
-		if(driver.findElement(By.xpath("//h5[contains(text(),'Confirm if')]/following-sibling::button")).isEnabled())
+		if(!driver.findElement(By.xpath("//h5[contains(text(),'Confirm if')]/following-sibling::button")).isEnabled())
 			System.out.println("Button is Disabled");
+		Point p=driver.findElement(By.xpath("//h5[contains(text(),'Find the position')]/following-sibling::button")).getLocation();
+		System.out.println(p);
+		System.out.println(driver.findElement(By.xpath("//h5[contains(text(),'Find the Save')]/following-sibling::button")).getCssValue("background-color"));
+		System.out.println(driver.findElement(By.xpath("//h5[contains(text(),'Find the height')]/following-sibling::button")).getSize());
+		Actions builder = new Actions(driver);
+		builder.moveToElement(driver.findElement(By.xpath("//h5[contains(text(),'Mouse')]/following-sibling::button"))).perform();
+		
+		System.out.println(driver.findElement(By.xpath("//h5[contains(text(),'Mouse')]/following-sibling::button/span")).getCssValue("background-color"));
+		driver.close();
 	}
 }
