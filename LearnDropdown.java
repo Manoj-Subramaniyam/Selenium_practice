@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -37,13 +38,25 @@ public class LearnDropdown {
 				l1.get(i).click();
 			
 		}
+		//Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		WebElement ele= driver.findElement(By.xpath("//label[text()='Select City']"));
+		wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(ele)));
+		driver.findElement(By.xpath("//label[text()='Select City']")).click();
 		
-		//option.selectByIndex(1);
+		l1=driver.findElements(By.xpath("(//div[@class='ui-selectonemenu-items-wrapper']/ul)[2]/li"));
 		
-		//option = new Select(driver.findElement(By.xpath("//h5[contains(text(),'Confirm')]/following::select")));
-		//option.selectByVisibleText("Bengaluru");
-		
-		Thread.sleep(2000);
+		for(WebElement value:l1)
+		{
+			System.out.println(value.getText());
+			if(value.getText().equals("Chennai"))
+			{
+				value.click();
+				break;
+			}
+		}
+		//driver.findElement(By.xpath("//h5[text()='Choose the Course']/following::button")).click();
+		//Thread.sleep(5000);
 		driver.close();
 	}
 
