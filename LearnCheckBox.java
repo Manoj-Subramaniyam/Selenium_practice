@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
+import java.util.List;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,19 +33,38 @@ public class LearnCheckBox {
 		if(ele.isSelected())
 			System.out.println("clicked");
 		driver.findElement(By.xpath("//span[text()='Ajax']/preceding-sibling::div[1]")).click();
-		ele= driver.findElement(By.xpath("//div[@role='alert']/div/span"));
+		//ele= driver.findElement(By.xpath("//div[@role='alert']/div/span"));
 		
-		if(ele.isDisplayed()) {
+		if(driver.findElement(By.xpath("//div[@role='alert']/div/span")).isDisplayed()) {
 			System.out.println("pop up displayed");
-			System.out.println(ele.getText());
+			System.out.println(driver.findElement(By.xpath("//div[@role='alert']/div/span")).getText());
 			driver.findElement(By.xpath("//span[text()='Ajax']/preceding-sibling::div[1]")).click();
-			//Thread.sleep(5000);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Unchecked']")));
-			ele= driver.findElement(By.xpath("//span[text()='Unchecked']"));
-			wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(ele)));
-			System.out.println(ele.getText());
+			System.out.println( driver.findElement(By.xpath("//div[@role='alert']/div/span")).getText());
+			
 			}
+		List<WebElement>lstOfWebElements= new ArrayList<WebElement>(driver.findElements(By.xpath("//h5[text()='Choose your favorite language(s)']/following-sibling::div//tr/td")));
+		for(WebElement temp:lstOfWebElements)
+		{
+			temp.click();
+		}
 		
+		ele=driver.findElement(By.xpath("//h5[text()='Tri State Checkbox']/following-sibling::div//div[contains(@class,'ui-chkbox-box')]"));
+		ele.click();
+		System.out.println(driver.findElement(By.xpath("(//div[@role='alert']/div/p)[2]")).getText());
+		
+		ele.click();
+		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//p[text()='State = 1']"))));
+		System.out.println(driver.findElement(By.xpath("(//div[@role='alert']/div/p)[2]")).getText());
+		
+		ele.click();
+		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//p[text()='State = 2']"))));
+		
+		System.out.println(driver.findElement(By.xpath("(//div[@role='alert']/div/p)[2]")).getText());
+		
+		//driver.findElement(By.xpath("//h5[text()='Tri State Checkbox']/following-sibling::div//span")).click();
+		//driver.findElement(By.xpath("//h5[text()='Tri State Checkbox']/following-sibling::div//span")).click();
+		Thread.sleep(3000);
 		driver.close();
 	}
 
