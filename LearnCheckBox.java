@@ -67,7 +67,25 @@ public class LearnCheckBox {
 		
 		if(!driver.findElement(By.xpath("//span[text()='Disabled']/preceding-sibling::div/input")).isEnabled())
 			System.out.println("checkbox disabled");
-		Thread.sleep(3000);
+		driver.findElement(By.xpath("//ul[@data-label='Cities']")).click();
+		lstOfWebElements=driver.findElements(By.xpath("//ul[@role='group']/li/label"));
+		for(WebElement temp:lstOfWebElements)
+		{
+			if(temp.getText().equals("London") ||temp.getText().equals("Rome") || temp.getText().equals("Amsterdam") )
+				temp.click();
+		}
+		driver.findElement(By.xpath("//a[@aria-label='Close']")).click();
+		lstOfWebElements=driver.findElements(By.xpath("//ul[@data-label='Cities']/li"));
+		for(WebElement temp:lstOfWebElements)
+		{
+			if(temp.getAttribute("data-item-value").equals("London")) 
+				System.out.println("London is selected");
+			if(temp.getAttribute("data-item-value").equals("Rome")) 
+				System.out.println("Rome is selected");
+			if(temp.getAttribute("data-item-value").equals("Amsterdam")) 
+				System.out.println("Amsterdam is selected");
+		}
+		
 		driver.close();
 	}
 
