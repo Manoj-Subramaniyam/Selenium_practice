@@ -61,9 +61,12 @@ public class LearnCheckBox {
 		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//p[text()='State = 2']"))));
 		
 		System.out.println(driver.findElement(By.xpath("(//div[@role='alert']/div/p)[2]")).getText());
+		driver.findElement(By.xpath("//h5[text()='Toggle Switch']/following-sibling::div/div[2]")).click();
+		Thread.sleep(1000);
+		System.out.println(driver.findElement(By.xpath("//div[@role='alert']/div/span")).getText());
 		
-		//driver.findElement(By.xpath("//h5[text()='Tri State Checkbox']/following-sibling::div//span")).click();
-		//driver.findElement(By.xpath("//h5[text()='Tri State Checkbox']/following-sibling::div//span")).click();
+		if(!driver.findElement(By.xpath("//span[text()='Disabled']/preceding-sibling::div/input")).isEnabled())
+			System.out.println("checkbox disabled");
 		Thread.sleep(3000);
 		driver.close();
 	}
