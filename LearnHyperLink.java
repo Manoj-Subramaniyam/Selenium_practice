@@ -32,12 +32,14 @@ public class LearnHyperLink {
 		String link=driver.findElement(By.linkText("Find the URL without clicking me.")).getAttribute("href");
 		System.out.println(link);
 		driver.findElement(By.linkText("How many links in this page?")).click();
-		lstoflinks=driver.findElements(By.xpath("//span[@id='form:messages']//parent::div//a"));
-		for()
+		lstoflinks=driver.findElements(By.xpath("//a"));
+		int size=0;
+		for(WebElement link1:lstoflinks)
 		{
-			
+			if(link1.getAttribute("href")!=null)
+				size+=1;
 		}
-		
+		System.out.println("Number of links in the page : "+size);
 		gotoHyperLink();
 		driver.findElement(By.linkText("Broken?")).click();
 		if(driver.findElement(By.xpath("//h2")).getText().contains("404"))
@@ -45,6 +47,16 @@ public class LearnHyperLink {
 		else
 			System.out.println("Link is Not Broken");
 		driver.navigate().back();
+		driver.findElement(By.linkText("How many links in this layout?")).click();
+		
+		lstoflinks=driver.findElements(By.xpath("//div[@class='layout-main-content']//a"));
+		size=0;
+		for(WebElement link1:lstoflinks)
+		{
+			if(link1.getAttribute("href")!=null)
+				size+=1;
+		}
+		System.out.println("Number of links in the layout : "+size);
 		
 		Thread.sleep(3000);
 		driver.close();
